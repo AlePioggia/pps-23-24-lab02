@@ -70,20 +70,15 @@ object Optionals:
         case Maybe(value) => Maybe(f(value))
         case Empty()      => Empty()
 
-    /** a function that takes one default value and a lambda and applies the
-      * last one if the value inside the Option is present or returns the
-      * provided default value otherwise.
-      *
-      * @param optional
-      *   the optional to apply the function to
-      * @param default
-      *   the default value to return if the optional is Empty
-      * @param f
-      *   the function to apply to the value of the optional
+    /** a function that keeps the value (if present, otherwise the output is
+      * None) only if it satisfies the given predicate.
+      * @param value
+      * @param predicate
       * @return
-      *   the f(optional) if the optional is present, default value otherwise
       */
-    def fold[A, B](optional: Optional[A])(default: B)(f: A => B): B =
-      optional match
-        case Maybe(value) => f(value)
-        case _            => default
+    def filter[A](value: Optional[A])(
+        predicate: Optional[A] => Boolean
+    ): Optional[A] =
+      value match
+        case x if predicate(x) => value
+        case _                 => Empty()

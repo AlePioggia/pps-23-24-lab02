@@ -61,7 +61,9 @@ object CompleteExercise extends App:
         case Maybe(value) => Maybe(f(value))
         case Empty()      => Empty()
 
-    def fold[A, B](optional: Optional[A])(default: B)(f: A => B): B =
-      optional match
-        case Maybe(value) => f(value)
-        case _            => default
+    def filter[A](value: Optional[A])(
+        predicate: Optional[A] => Boolean
+    ): Optional[A] =
+      value match
+        case x if predicate(x) => value
+        case _                 => Empty()
