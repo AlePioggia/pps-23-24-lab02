@@ -1,4 +1,4 @@
-package u02.`lab-exercises`
+package u02.exercises
 
 object Task2b extends App:
   val p1: Int => Int => Int => Boolean = x => y => z => x <= y && y == z

@@ -1,4 +1,4 @@
-package u02.`lab-exercises`
+package u02.exercises
 
 object Task2a extends App:
   val f: Int => String = _ match
